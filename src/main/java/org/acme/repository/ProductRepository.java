@@ -1,6 +1,7 @@
 package org.acme.repository;
 
 import jakarta.enterprise.context.Dependent;
+import jakarta.transaction.Transactional;
 import org.acme.entity.Product;
 
 import java.util.Optional;
@@ -8,17 +9,17 @@ import java.util.Optional;
 @Dependent
 public class ProductRepository extends Repository<Product> {
     @Override
-    protected Class<Product> getEntityClass() {
+    public Class<Product> getEntityClass() {
         return Product.class;
     }
 
     @Override
+    @Transactional
     public Optional<Product> update(Product entity) {
-        var entityOptional = readById(entity.getId());
-        return entityOptional.map((managed) -> {
-            managed.setTitle(entity.getTitle());
-            managed.setPrice(entity.getPrice());
-            return em.merge(managed);
+        return readById(entity.getId()).map((managedEntity) -> {
+            managedEntity.setTitle(entity.getTitle());
+            managedEntity.setPrice(entity.getPrice());
+            return em.merge(managedEntity);
         });
     }
 }

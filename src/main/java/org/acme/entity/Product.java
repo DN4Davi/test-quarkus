@@ -15,7 +15,16 @@ public class Product implements Serializable {
 
     String title;
 
-    Float price;
+    Double price;
+
+    public Product() {
+
+    }
+
+    public  Product(String title, Double price) {
+        setTitle(title);
+        setPrice(price);
+    }
 
     public String getId() {
         return id;
@@ -33,11 +42,11 @@ public class Product implements Serializable {
         this.title = title;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

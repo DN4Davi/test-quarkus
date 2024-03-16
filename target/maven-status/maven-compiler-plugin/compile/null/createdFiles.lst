@@ -1,9 +1,12 @@
+org\acme\ClientResource.class
 org\acme\ExampleResource.class
-org\acme\repository\ClientRepository.class
-org\acme\MyEntity.class
+org\acme\ProductResource.class
 org\acme\entity\CartProduct.class
-org\acme\entity\Client.class
 org\acme\entity\Product.class
 org\acme\repository\ProductRepository.class
+org\acme\repository\ClientRepository.class
+org\acme\MyEntity.class
+org\acme\CartResource.class
+org\acme\entity\Client.class
 org\acme\repository\CartProductRepository.class
 org\acme\repository\Repository.class

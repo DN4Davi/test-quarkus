@@ -1,25 +1,25 @@
 package org.acme.repository;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.transaction.Transactional;
 import org.acme.entity.Client;
 
 import java.util.Optional;
 
-@ApplicationScoped
+@Dependent
 public class ClientRepository extends Repository<Client> {
-
     @Override
-    protected Class<Client> getEntityClass() {
+    public Class<Client> getEntityClass() {
         return Client.class;
     }
 
     @Override
+    @Transactional
     public Optional<Client> update(Client entity) {
-        var optionalEntity = readById(entity.getId());
-        return optionalEntity.map((Client managed) -> {
-            managed.setName(entity.getName());
-            managed.setCart(entity.getCart());
-            return em.merge(managed);
+        return readById(entity.getId()).map((managedEntity) -> {
+            managedEntity.setName(entity.getName());
+            managedEntity.setCart(entity.getCart());
+            return em.merge(managedEntity);
         });
     }
 }
